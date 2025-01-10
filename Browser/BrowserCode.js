@@ -275,7 +275,7 @@ function GetBrowserCode(type) {
     code += fs.readFileSync(`${__dirname}/Event/UIEvent/MouseEvent/PointerEvent/PointerEvent.js`) + '\r\n';
 
     // 
-    
+    code += fs.readFileSync(`${__dirname}/Promise/Promise.js`) + '\r\n';
 
     // ----------------------------------------------实例化浏览器中的对象-----------------------------------------------------------------
     code += fs.readFileSync(`${__dirname}/CreateEnv.js`) + '\r\n';

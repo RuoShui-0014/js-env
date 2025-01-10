@@ -948,6 +948,19 @@ namespace rs {
         }
     }
 
+    void RsCreateStaticFunction(const FunctionCallbackInfo<Value>& info){
+        if (info.Length() == 3 && info[0]->IsString() && info[1]->IsNumber() && info[2]->IsFunction()) {
+            Isolate* isolate = info.GetIsolate();
+            Local<Context> context = isolate->GetCurrentContext();
+            int length = info[1].As<Number>()->Value();
+            Local<Function> fun_temp = Function::New(
+                context, RsCreateFunctioncallback, info[2], length,
+                ConstructorBehavior::kThrow
+            ).ToLocalChecked();
+            fun_temp->SetName(info[0].As<String>());
+            info.GetReturnValue().Set(fun_temp);
+        }
+    }
 
     // 给js对象在c++层面设置/获取属性
     void RsSetPrivateProperty(const FunctionCallbackInfo<Value>& info) {
@@ -1020,6 +1033,7 @@ namespace rs {
             {"RsCreateSetter", 2, RsCreateSetter, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
             {"RsCreateAction", 3, RsCreateAction, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
             {"RsCreateFunction", 3, RsCreateFunction, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
+            {"RsCreateStaticFunction", 3, RsCreateStaticFunction, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
             {"RsCreateConstructor", 2, RsCreateConstructor, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
             {"RsCreateWindowGetter", 2, RsCreateWindowGetter, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
             {"RsCreateWindowSetter", 1, RsCreateWindowSetter, static_cast<PropertyAttribute>(PropertyAttribute::DontEnum | PropertyAttribute::DontDelete)},
