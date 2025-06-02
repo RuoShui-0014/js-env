@@ -11,6 +11,7 @@ let code = VMCode + fs.readFileSync(`${__dirname}/Sites/rs_药监局.js`);
 let isolate = new ivm.Isolate({ inspector: true, memoryLimit: 1024 });
 (async function () {
     let context = await isolate.createContext({ inspector: true, rsvm: true, intercept: true });
+    context.global.setSync('ivm', ivm);
 
     let inspector = isolate.createInspectorSession(); 
     inspector.dispatchProtocolMessage('{"id":1,"method":"Debugger.enable"}');
