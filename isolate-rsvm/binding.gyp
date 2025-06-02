@@ -3,7 +3,7 @@
 		'default_configuration': 'Release',
 		'configurations': {
 			'Common': {
-				'cflags_cc': [ '-std=c++17', '-g', '-Wno-unknown-pragmas' ],
+				'cflags_cc': [ '-std=c++20', '-g', '-Wno-unknown-pragmas' ],
 				'cflags_cc!': [ '-fno-exceptions' ],
 				'include_dirs': [ './src', './vendor' ],
 				'xcode_settings': {
