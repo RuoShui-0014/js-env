@@ -6,8 +6,8 @@
 using namespace v8;
 
 namespace rs {
-    Local<FunctionTemplate> InterfaceWindowTemplate(Isolate* isolate);
-    Local<ObjectTemplate> CreateRsGlobalTemplate(Isolate* isolate, bool intercept);
-}
+Local<FunctionTemplate> InterfaceWindowTemplate(Isolate* isolate);
+Local<ObjectTemplate> CreateRsGlobalTemplate(Isolate* isolate, bool intercept);
+}  // namespace rs
 
-#endif // !RS_BROWSER_WINDOW_H_
+#endif  // !RS_BROWSER_WINDOW_H_

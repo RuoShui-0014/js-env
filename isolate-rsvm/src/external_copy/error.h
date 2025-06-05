@@ -1,33 +1,41 @@
 #pragma once
-#include "external_copy.h"
 #include "./string.h"
+#include "external_copy.h"
 
 namespace ivm {
 
 /**
- * Make a special case for errors so if someone throws then a similar error will come out the other
- * side.
+ * Make a special case for errors so if someone throws then a similar error will
+ * come out the other side.
  */
 class ExternalCopyError : public ExternalCopy {
-	friend class ExternalCopy;
-	public:
-		enum class ErrorType { Error, RangeError, ReferenceError, SyntaxError, TypeError, CustomError };
+  friend class ExternalCopy;
 
-		ExternalCopyError(
-			ErrorType error_type,
-			ExternalCopyString name,
-			ExternalCopyString message,
-			ExternalCopyString stack
-		);
-		ExternalCopyError(ErrorType error_type, const char* message, const std::string& stack = "");
+ public:
+  enum class ErrorType {
+    Error,
+    RangeError,
+    ReferenceError,
+    SyntaxError,
+    TypeError,
+    CustomError
+  };
 
-		auto CopyInto(bool transfer_in = false) -> v8::Local<v8::Value> final;
+  ExternalCopyError(ErrorType error_type,
+                    ExternalCopyString name,
+                    ExternalCopyString message,
+                    ExternalCopyString stack);
+  ExternalCopyError(ErrorType error_type,
+                    const char* message,
+                    const std::string& stack = "");
 
-	private:
-		ErrorType error_type;
-		ExternalCopyString name;
-		ExternalCopyString message;
-		ExternalCopyString stack;
+  auto CopyInto(bool transfer_in = false) -> v8::Local<v8::Value> final;
+
+ private:
+  ErrorType error_type;
+  ExternalCopyString name;
+  ExternalCopyString message;
+  ExternalCopyString stack;
 };
 
-} // namespace ivm
+}  // namespace ivm

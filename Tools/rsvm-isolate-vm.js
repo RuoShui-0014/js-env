@@ -3,7 +3,7 @@
 Object.assign(rsvm, {
     // getRandomValues: getRandomValues,
     // 调试设置
-    ifProxy: true, log: false,
+    ifProxy: true, log: false, glog: false,
     logFunction: {
         constructor(name, args, value) {
             let ary = [];

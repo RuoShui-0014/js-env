@@ -5,5 +5,5 @@
 using namespace v8;
 
 namespace rs {
-    Local<FunctionTemplate> InterfaceEventTargetTemplate(Isolate* isolate);
+Local<FunctionTemplate> InterfaceEventTargetTemplate(Isolate* isolate);
 }
